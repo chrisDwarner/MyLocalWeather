@@ -25,8 +25,7 @@ struct CityListNavView: View {
 /// the list of Cities you are tracking
 struct CityListView: View {
     
-    let cities = ["1","2","3","4","5"]
-    // show 10 items
+    let cities: [City] = [City(name: "1"), City(name: "2"), City(name: "3"), City(name: "4"), City(name: "5")]
     @State var range: Range<Int> = 0..<5
     
     
@@ -35,7 +34,7 @@ struct CityListView: View {
         VStack(spacing: 0) {
             
             ForEach( range, id: \.self ) {
-                Text("City List View \(cities[$0])").padding()
+                CityListItemView(city: cities[$0])
             }
         }
         Spacer()

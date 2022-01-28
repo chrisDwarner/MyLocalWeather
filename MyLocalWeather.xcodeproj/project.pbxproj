@@ -14,6 +14,9 @@
 		83A1E00327A4582300E047B4 /* MyLocalWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1E00227A4582300E047B4 /* MyLocalWeatherTests.swift */; };
 		83A1E00D27A4582300E047B4 /* MyLocalWeatherUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1E00C27A4582300E047B4 /* MyLocalWeatherUITests.swift */; };
 		83A1E00F27A4582300E047B4 /* MyLocalWeatherUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1E00E27A4582300E047B4 /* MyLocalWeatherUITestsLaunchTests.swift */; };
+		83A1E01C27A47B4300E047B4 /* CityListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1E01B27A47B4300E047B4 /* CityListItemView.swift */; };
+		83A1E01F27A4A5A500E047B4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 83A1E01E27A4A5A500E047B4 /* Realm */; };
+		83A1E02127A4A5A500E047B4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 83A1E02027A4A5A500E047B4 /* RealmSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,7 @@
 		83A1E00827A4582300E047B4 /* MyLocalWeatherUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyLocalWeatherUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A1E00C27A4582300E047B4 /* MyLocalWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocalWeatherUITests.swift; sourceTree = "<group>"; };
 		83A1E00E27A4582300E047B4 /* MyLocalWeatherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocalWeatherUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		83A1E01B27A47B4300E047B4 /* CityListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListItemView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,6 +55,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83A1E02127A4A5A500E047B4 /* RealmSwift in Frameworks */,
+				83A1E01F27A4A5A500E047B4 /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +104,7 @@
 				83A1DFF327A4582200E047B4 /* CityListNavView.swift */,
 				83A1DFF527A4582300E047B4 /* Assets.xcassets */,
 				83A1DFF727A4582300E047B4 /* Preview Content */,
+				83A1E01B27A47B4300E047B4 /* CityListItemView.swift */,
 			);
 			path = MyLocalWeather;
 			sourceTree = "<group>";
@@ -143,6 +150,10 @@
 			dependencies = (
 			);
 			name = MyLocalWeather;
+			packageProductDependencies = (
+				83A1E01E27A4A5A500E047B4 /* Realm */,
+				83A1E02027A4A5A500E047B4 /* RealmSwift */,
+			);
 			productName = MyLocalWeather;
 			productReference = 83A1DFEE27A4582200E047B4 /* MyLocalWeather.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +226,9 @@
 				Base,
 			);
 			mainGroup = 83A1DFE527A4582100E047B4;
+			packageReferences = (
+				83A1E01D27A4A5A500E047B4 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 83A1DFEF27A4582200E047B4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -257,6 +271,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83A1E01C27A47B4300E047B4 /* CityListItemView.swift in Sources */,
 				83A1DFF427A4582200E047B4 /* CityListNavView.swift in Sources */,
 				83A1DFF227A4582200E047B4 /* MyLocalWeatherApp.swift in Sources */,
 			);
@@ -585,6 +600,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		83A1E01D27A4A5A500E047B4 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:realm/realm-swift.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 10.20.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		83A1E01E27A4A5A500E047B4 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 83A1E01D27A4A5A500E047B4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		83A1E02027A4A5A500E047B4 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 83A1E01D27A4A5A500E047B4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 83A1DFE627A4582100E047B4 /* Project object */;
 }
