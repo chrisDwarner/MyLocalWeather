@@ -11,7 +11,7 @@ import SwiftUI
 struct MyLocalWeatherApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CityListNavView()
         }
     }
     

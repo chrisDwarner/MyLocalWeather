@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		83A1DFF227A4582200E047B4 /* MyLocalWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1DFF127A4582200E047B4 /* MyLocalWeatherApp.swift */; };
-		83A1DFF427A4582200E047B4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1DFF327A4582200E047B4 /* ContentView.swift */; };
+		83A1DFF427A4582200E047B4 /* CityListNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1DFF327A4582200E047B4 /* CityListNavView.swift */; };
 		83A1DFF627A4582300E047B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83A1DFF527A4582300E047B4 /* Assets.xcassets */; };
 		83A1DFF927A4582300E047B4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83A1DFF827A4582300E047B4 /* Preview Assets.xcassets */; };
 		83A1E00327A4582300E047B4 /* MyLocalWeatherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1E00227A4582300E047B4 /* MyLocalWeatherTests.swift */; };
@@ -36,7 +36,7 @@
 /* Begin PBXFileReference section */
 		83A1DFEE27A4582200E047B4 /* MyLocalWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyLocalWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A1DFF127A4582200E047B4 /* MyLocalWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocalWeatherApp.swift; sourceTree = "<group>"; };
-		83A1DFF327A4582200E047B4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		83A1DFF327A4582200E047B4 /* CityListNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListNavView.swift; sourceTree = "<group>"; };
 		83A1DFF527A4582300E047B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83A1DFF827A4582300E047B4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		83A1DFFE27A4582300E047B4 /* MyLocalWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MyLocalWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				83A1DFF127A4582200E047B4 /* MyLocalWeatherApp.swift */,
-				83A1DFF327A4582200E047B4 /* ContentView.swift */,
+				83A1DFF327A4582200E047B4 /* CityListNavView.swift */,
 				83A1DFF527A4582300E047B4 /* Assets.xcassets */,
 				83A1DFF727A4582300E047B4 /* Preview Content */,
 			);
@@ -257,7 +257,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				83A1DFF427A4582200E047B4 /* ContentView.swift in Sources */,
+				83A1DFF427A4582200E047B4 /* CityListNavView.swift in Sources */,
 				83A1DFF227A4582200E047B4 /* MyLocalWeatherApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

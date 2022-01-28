@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  CityListNavView.swift
 //  MyLocalWeather
 //
 //  Created by chris warner on 1/28/22.
@@ -7,7 +7,8 @@
 
 import SwiftUI
 
-struct ContentView: View {
+/// the default city list view with a navigation view
+struct CityListNavView: View {
     var body: some View {
         NavigationView {
             CityListView()
@@ -18,16 +19,10 @@ struct ContentView: View {
                     Text("Add Cities")
                 })
         }
-        
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
-}
-
+/// the list of Cities you are tracking
 struct CityListView: View {
     
     let cities = ["1","2","3","4","5"]
@@ -46,3 +41,12 @@ struct CityListView: View {
         Spacer()
     }
 }
+
+
+#if DEBUG
+struct CityListNavView_Previews: PreviewProvider {
+    static var previews: some View {
+        CityListNavView()
+    }
+}
+#endif
