@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25E7A3E88668AB4630A0CA7C /* libPods-MyLocalWeather.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 63FAD35DCFF3A78F6CA26339 /* libPods-MyLocalWeather.a */; };
 		83A1DFF227A4582200E047B4 /* MyLocalWeatherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1DFF127A4582200E047B4 /* MyLocalWeatherApp.swift */; };
 		83A1DFF427A4582200E047B4 /* CityListNavView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1DFF327A4582200E047B4 /* CityListNavView.swift */; };
 		83A1DFF627A4582300E047B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83A1DFF527A4582300E047B4 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 		83A1E01C27A47B4300E047B4 /* CityListItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1E01B27A47B4300E047B4 /* CityListItemView.swift */; };
 		83A1E01F27A4A5A500E047B4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 83A1E01E27A4A5A500E047B4 /* Realm */; };
 		83A1E02127A4A5A500E047B4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 83A1E02027A4A5A500E047B4 /* RealmSwift */; };
+		83A1E02427A4A8FB00E047B4 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A1E02327A4A8FB00E047B4 /* City.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		487A3F2D9C95D8A974D95890 /* Pods-MyLocalWeather.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyLocalWeather.release.xcconfig"; path = "Target Support Files/Pods-MyLocalWeather/Pods-MyLocalWeather.release.xcconfig"; sourceTree = "<group>"; };
+		63FAD35DCFF3A78F6CA26339 /* libPods-MyLocalWeather.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MyLocalWeather.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A1DFEE27A4582200E047B4 /* MyLocalWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyLocalWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83A1DFF127A4582200E047B4 /* MyLocalWeatherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocalWeatherApp.swift; sourceTree = "<group>"; };
 		83A1DFF327A4582200E047B4 /* CityListNavView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListNavView.swift; sourceTree = "<group>"; };
@@ -48,6 +52,8 @@
 		83A1E00C27A4582300E047B4 /* MyLocalWeatherUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocalWeatherUITests.swift; sourceTree = "<group>"; };
 		83A1E00E27A4582300E047B4 /* MyLocalWeatherUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocalWeatherUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		83A1E01B27A47B4300E047B4 /* CityListItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityListItemView.swift; sourceTree = "<group>"; };
+		83A1E02327A4A8FB00E047B4 /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
+		8ADD9971320D671AF820A7A8 /* Pods-MyLocalWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyLocalWeather.debug.xcconfig"; path = "Target Support Files/Pods-MyLocalWeather/Pods-MyLocalWeather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +63,7 @@
 			files = (
 				83A1E02127A4A5A500E047B4 /* RealmSwift in Frameworks */,
 				83A1E01F27A4A5A500E047B4 /* Realm in Frameworks */,
+				25E7A3E88668AB4630A0CA7C /* libPods-MyLocalWeather.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +84,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		442A12E1C89947D496FE8E62 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				63FAD35DCFF3A78F6CA26339 /* libPods-MyLocalWeather.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		83A1DFE527A4582100E047B4 = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +99,8 @@
 				83A1E00127A4582300E047B4 /* MyLocalWeatherTests */,
 				83A1E00B27A4582300E047B4 /* MyLocalWeatherUITests */,
 				83A1DFEF27A4582200E047B4 /* Products */,
+				D90BB05775223CBC7A5C90B8 /* Pods */,
+				442A12E1C89947D496FE8E62 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,11 +117,12 @@
 		83A1DFF027A4582200E047B4 /* MyLocalWeather */ = {
 			isa = PBXGroup;
 			children = (
+				83A1E02527A4A90500E047B4 /* Views */,
+				83A1E02227A4A8E800E047B4 /* Model */,
 				83A1DFF127A4582200E047B4 /* MyLocalWeatherApp.swift */,
 				83A1DFF327A4582200E047B4 /* CityListNavView.swift */,
 				83A1DFF527A4582300E047B4 /* Assets.xcassets */,
 				83A1DFF727A4582300E047B4 /* Preview Content */,
-				83A1E01B27A47B4300E047B4 /* CityListItemView.swift */,
 			);
 			path = MyLocalWeather;
 			sourceTree = "<group>";
@@ -134,6 +152,32 @@
 			path = MyLocalWeatherUITests;
 			sourceTree = "<group>";
 		};
+		83A1E02227A4A8E800E047B4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				83A1E02327A4A8FB00E047B4 /* City.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		83A1E02527A4A90500E047B4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				83A1E01B27A47B4300E047B4 /* CityListItemView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D90BB05775223CBC7A5C90B8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8ADD9971320D671AF820A7A8 /* Pods-MyLocalWeather.debug.xcconfig */,
+				487A3F2D9C95D8A974D95890 /* Pods-MyLocalWeather.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -141,9 +185,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 83A1E01227A4582300E047B4 /* Build configuration list for PBXNativeTarget "MyLocalWeather" */;
 			buildPhases = (
+				E5EFEF74AB472A7711519B6C /* [CP] Check Pods Manifest.lock */,
 				83A1DFEA27A4582200E047B4 /* Sources */,
 				83A1DFEB27A4582200E047B4 /* Frameworks */,
 				83A1DFEC27A4582200E047B4 /* Resources */,
+				9F338FB7209F0EB31CB6B80D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -227,7 +273,7 @@
 			);
 			mainGroup = 83A1DFE527A4582100E047B4;
 			packageReferences = (
-				83A1E01D27A4A5A500E047B4 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				83A1E01D27A4A5A500E047B4 /* XCRemoteSwiftPackageReference "realm-swift.git" */,
 			);
 			productRefGroup = 83A1DFEF27A4582200E047B4 /* Products */;
 			projectDirPath = "";
@@ -266,6 +312,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		9F338FB7209F0EB31CB6B80D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyLocalWeather/Pods-MyLocalWeather-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyLocalWeather/Pods-MyLocalWeather-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyLocalWeather/Pods-MyLocalWeather-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E5EFEF74AB472A7711519B6C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyLocalWeather-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		83A1DFEA27A4582200E047B4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -273,6 +361,7 @@
 			files = (
 				83A1E01C27A47B4300E047B4 /* CityListItemView.swift in Sources */,
 				83A1DFF427A4582200E047B4 /* CityListNavView.swift in Sources */,
+				83A1E02427A4A8FB00E047B4 /* City.swift in Sources */,
 				83A1DFF227A4582200E047B4 /* MyLocalWeatherApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,6 +517,7 @@
 		};
 		83A1E01327A4582300E047B4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8ADD9971320D671AF820A7A8 /* Pods-MyLocalWeather.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -457,6 +547,7 @@
 		};
 		83A1E01427A4582300E047B4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 487A3F2D9C95D8A974D95890 /* Pods-MyLocalWeather.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -602,7 +693,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		83A1E01D27A4A5A500E047B4 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+		83A1E01D27A4A5A500E047B4 /* XCRemoteSwiftPackageReference "realm-swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:realm/realm-swift.git";
 			requirement = {
@@ -615,12 +706,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		83A1E01E27A4A5A500E047B4 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 83A1E01D27A4A5A500E047B4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 83A1E01D27A4A5A500E047B4 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
 			productName = Realm;
 		};
 		83A1E02027A4A5A500E047B4 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 83A1E01D27A4A5A500E047B4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 83A1E01D27A4A5A500E047B4 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
