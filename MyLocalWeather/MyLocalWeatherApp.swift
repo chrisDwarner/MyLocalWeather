@@ -14,4 +14,9 @@ struct MyLocalWeatherApp: App {
             ContentView()
         }
     }
+    
+    /// initialize the application.
+    init() {
+        // setup the openWeatherApi key
+    }
 }
