@@ -17,10 +17,6 @@ struct CityListNavView: View {
         NavigationView {
             if let cities = cityList.first {
                 CityListView(cityList: cities)
-                    .navigationBarTitle("MyLocalWeather", displayMode: .inline)
-                    .navigationBarItems(leading: EditButton(), trailing: Button(action: buttonAction ) {
-                        Image(systemName: "plus")
-                    })
             }
             else {
                 ProgressView().onAppear {
@@ -30,15 +26,17 @@ struct CityListNavView: View {
         }
     }
     
-    func buttonAction() {
-        //TODO:- launch Google Places search view controller.
-    }
+//    func buttonAction() {
+//        //TODO:- launch Google Places search view controller.
+//
+//    }
 }
 
 /// the list of Cities you are tracking
 struct CityListView: View {
     
     @ObservedRealmObject var cityList: Group
+    @State private var showAddCityAlert = false
 
     var body: some View {
         Divider()
@@ -48,6 +46,15 @@ struct CityListView: View {
             }.onDelete(perform: $cityList.cities.remove )
                 .onMove(perform: $cityList.cities.move )
         }
+        .navigationBarTitle("MyLocalWeather", displayMode: .inline)
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(leading: EditButton(), trailing: Button(action: {
+            showAddCityAlert.toggle()
+        }) {
+            Image(systemName: "plus")
+        }.sheet(isPresented: $showAddCityAlert) {
+            AddCityView(group: cityList)
+        })
         Spacer()
     }
 }

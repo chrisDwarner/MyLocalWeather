@@ -12,8 +12,14 @@ import RealmSwift
 /// by city name or location
 final class City: Object, ObjectKeyIdentifiable {
     
-    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted(primaryKey: true) var _id: ObjectId = ObjectId()
     @Persisted var name: String
     
     @Persisted(originProperty: "cities") var group: LinkingObjects<Group>
+    
+    convenience init( name: String ) {
+        self.init()
+        self._id = ObjectId.generate()
+        self.name = name
+    }
 }
