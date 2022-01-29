@@ -5,37 +5,48 @@
 //  Created by chris warner on 1/28/22.
 //
 
+import RealmSwift
 import SwiftUI
 
 /// the default city list view with a navigation view
 struct CityListNavView: View {
+    
+    @ObservedResults(Group.self) var cityList
+    
     var body: some View {
         NavigationView {
-            CityListView()
-                .navigationBarTitle("MyLocalWeather", displayMode: .inline)
-                .navigationBarItems(trailing: Button(action: {
-                    //TODO: - launch search modal view Google places
-                }) {
-                    Text("Add Cities")
-                })
+            if let cities = cityList.first {
+                CityListView(cityList: cities)
+                    .navigationBarTitle("MyLocalWeather", displayMode: .inline)
+                    .navigationBarItems(leading: EditButton(), trailing: Button(action: buttonAction ) {
+                        Image(systemName: "plus")
+                    })
+            }
+            else {
+                ProgressView().onAppear {
+                    $cityList.append(Group())
+                }
+            }
         }
+    }
+    
+    func buttonAction() {
+        //TODO:- launch Google Places search view controller.
     }
 }
 
 /// the list of Cities you are tracking
 struct CityListView: View {
     
-    let cities: [City] = [City(value: "1"), City(value: "2"), City(value: "3"), City(value: "4"), City(value: "5")]
-    @State var range: Range<Int> = 0..<5
-    
-    
+    @ObservedRealmObject var cityList: Group
+
     var body: some View {
         Divider()
         VStack(spacing: 0) {
-            
-            ForEach( range, id: \.self ) {
-                CityListItemView(city: cities[$0])
-            }
+            ForEach( cityList.cities ) {
+                CityListItemView(city: $0 )
+            }.onDelete(perform: $cityList.cities.remove )
+                .onMove(perform: $cityList.cities.move )
         }
         Spacer()
     }

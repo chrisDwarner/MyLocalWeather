@@ -8,6 +8,17 @@
 import Foundation
 import RealmSwift
 
-class City: Object {
+final class City: Object, ObjectKeyIdentifiable {
+    
+    @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var name: String
+    
+    @Persisted(originProperty: "cities") var group: LinkingObjects<Group>
+}
+
+final class Group: Object, ObjectKeyIdentifiable {
+    @Persisted(primaryKey: true) var _id: ObjectId
+    @Persisted var name: String = "all"
+
+    @Persisted var cities = RealmSwift.List<City>()
 }

@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct CityListItemView: View {
-    var city: City
+    
+    @ObservedRealmObject var city: City
     
     var body: some View {
-        Text("City of \(city.name)")
+        NavigationLink(destination: ForecastDetailsView(city: city)) {
+            Text("City of \(city.name)")
+        }
     }
 }
 
