@@ -17,12 +17,6 @@ struct CityListItemView: View {
 
 struct CityListItemView_Previews: PreviewProvider {
     static var previews: some View {
-        CityListItemView(city: City(name: "Santa Cruz"))
+        CityListItemView(city: City(value: "Santa Cruz"))
     }
-}
-
-struct City: Identifiable {
-    let id = UUID()
-    
-    let name: String
 }

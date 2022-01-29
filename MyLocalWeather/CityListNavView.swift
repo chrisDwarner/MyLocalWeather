@@ -25,7 +25,7 @@ struct CityListNavView: View {
 /// the list of Cities you are tracking
 struct CityListView: View {
     
-    let cities: [City] = [City(name: "1"), City(name: "2"), City(name: "3"), City(name: "4"), City(name: "5")]
+    let cities: [City] = [City(value: "1"), City(value: "2"), City(value: "3"), City(value: "4"), City(value: "5")]
     @State var range: Range<Int> = 0..<5
     
     
