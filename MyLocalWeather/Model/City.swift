@@ -8,17 +8,12 @@
 import Foundation
 import RealmSwift
 
+/// City is a Realm object that contains enough information to fetch the weather information
+/// by city name or location
 final class City: Object, ObjectKeyIdentifiable {
     
     @Persisted(primaryKey: true) var _id: ObjectId
     @Persisted var name: String
     
     @Persisted(originProperty: "cities") var group: LinkingObjects<Group>
-}
-
-final class Group: Object, ObjectKeyIdentifiable {
-    @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted var name: String = "all"
-
-    @Persisted var cities = RealmSwift.List<City>()
 }
