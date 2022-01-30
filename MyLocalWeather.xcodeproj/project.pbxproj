@@ -123,6 +123,7 @@
 		83A1DFF027A4582200E047B4 /* MyLocalWeather */ = {
 			isa = PBXGroup;
 			children = (
+				83AE5EC327A6F6F200A9289D /* GooglePlaces */,
 				83A1E02527A4A90500E047B4 /* Views */,
 				83A1E02227A4A8E800E047B4 /* Model */,
 				83A1DFF127A4582200E047B4 /* MyLocalWeatherApp.swift */,
@@ -175,6 +176,13 @@
 				833445BA27A4EE6300F3F187 /* AddCityView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		83AE5EC327A6F6F200A9289D /* GooglePlaces */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = GooglePlaces;
 			sourceTree = "<group>";
 		};
 		D90BB05775223CBC7A5C90B8 /* Pods */ = {

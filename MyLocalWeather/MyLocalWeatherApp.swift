@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import GooglePlaces
 
 @main
 struct MyLocalWeatherApp: App {
@@ -17,6 +18,11 @@ struct MyLocalWeatherApp: App {
     
     /// initialize the application.
     init() {
+        
+        // setup google places
+        GMSPlacesClient.provideAPIKey("AIzaSyDGATUosEFYd5bN4Ul4Zhaz_TAKZ8bCY90")
+        
         // setup the openWeatherApi key
+        
     }
 }
