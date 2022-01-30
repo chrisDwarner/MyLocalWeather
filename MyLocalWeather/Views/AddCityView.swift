@@ -4,6 +4,7 @@
 //
 //  Created by chris warner on 1/28/22.
 //
+#if DEBUG
 
 import RealmSwift
 import SwiftUI
@@ -36,11 +37,10 @@ struct AddCityView: View {
     }
 }
 
-//#if DEBUG
-//struct AddCityView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        AddCityView()
-//    }
-//}
-//#endif
+struct AddCityView_Previews: PreviewProvider {
+    static var previews: some View {
+        AddCityView(group: Group())
+    }
+}
+#endif
 

@@ -25,11 +25,6 @@ struct CityListNavView: View {
             }
         }
     }
-    
-//    func buttonAction() {
-//        //TODO:- launch Google Places search view controller.
-//
-//    }
 }
 
 /// the list of Cities you are tracking
@@ -55,7 +50,8 @@ struct CityListView: View {
             }) {
                 Image(systemName: "plus")
             }.sheet(isPresented: $showAddCityAlert) {
-                AddCityView(group: cityList)
+                AddPlacesView(group: cityList)
+//                AddCityView(group: cityList)
             })
         }
         Spacer()
