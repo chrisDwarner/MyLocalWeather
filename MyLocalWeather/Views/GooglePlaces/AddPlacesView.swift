@@ -46,8 +46,14 @@ struct PlacesViewController: UIViewControllerRepresentable {
         @ObservedRealmObject var group: Group
 
         func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-            guard let cityName = place.name else { return }
-            $group.cities.append(City(name: cityName))
+            guard let cityName = place.name  else { return }
+            let coord = place.coordinate
+            let city = City(name: cityName, coord: coord)
+            
+            $group.cities.append(city)
+            
+            // todo: fetch weather info for this location
+            
             self.parent.presentationMode.wrappedValue.dismiss()
         }
         
