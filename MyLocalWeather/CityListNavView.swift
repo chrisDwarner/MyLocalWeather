@@ -51,7 +51,6 @@ struct CityListView: View {
                 Image(systemName: "plus")
             }.sheet(isPresented: $showAddCityAlert) {
                 AddPlacesView(group: cityList)
-//                AddCityView(group: cityList)
             })
         }
         Spacer()
