@@ -12,6 +12,11 @@ struct CityListItemView: View {
     
     @ObservedRealmObject var city: City
     
+    @State var cityName: String = "CityName"
+    @State var icon: Image = Image("LaunchScreen", bundle: .main)
+    @State var tempHumidity: String = "temp xxx Humidity: xx%"
+    @State var feelsLike: String = "Feels like xxx. clear sky. Light breeze "
+    
     var body: some View {
         NavigationLink(destination: ForecastDetailsView(city: city)) {
             VStack(alignment: .leading, spacing: 0) {
@@ -22,13 +27,13 @@ struct CityListItemView: View {
 
                     }
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("City of \(city.name)")
+                        Text(cityName)
                             .bold()
                             .foregroundColor(.white)
-                        Text("temp: xxx Humidity: XX%")
+                        Text(tempHumidity)
                     }
                 }
-                Text("Feels like xxx. clear sky. Light breeze ").padding([ .trailing])
+                Text(feelsLike).padding([ .trailing])
                     .foregroundColor(.primary)
             }
             .padding(6)
