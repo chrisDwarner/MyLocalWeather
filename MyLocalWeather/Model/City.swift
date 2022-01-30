@@ -13,7 +13,7 @@ import RealmSwift
 final class City: Object, ObjectKeyIdentifiable {
     
     @Persisted(primaryKey: true) var _id: ObjectId = ObjectId()
-    @Persisted var name: String
+    @Persisted var name: String = "cityName"
     
     @Persisted(originProperty: "cities") var group: LinkingObjects<Group>
     

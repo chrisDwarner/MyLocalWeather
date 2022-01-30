@@ -39,7 +39,10 @@ struct CityListView: View {
             List {
                 ForEach( cityList.cities ) {
                     CityListItemView(city: $0 )
-                }
+                        .background(Color("LaunchScreenBackground", bundle: .main).edgesIgnoringSafeArea(.all))
+                        .cornerRadius(6)
+                        .clipped()
+                    .listRowSeparator(.hidden)                }
                 .onDelete(perform: $cityList.cities.remove )
                 .onMove(perform: $cityList.cities.move )
             }
@@ -56,7 +59,6 @@ struct CityListView: View {
         Spacer()
     }
 }
-
 
 #if DEBUG
 struct CityListNavView_Previews: PreviewProvider {

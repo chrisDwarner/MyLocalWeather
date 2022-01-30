@@ -22,7 +22,7 @@ struct MyLocalWeatherApp: App {
         // setup google places
         GMSPlacesClient.provideAPIKey("AIzaSyDGATUosEFYd5bN4Ul4Zhaz_TAKZ8bCY90")
         
-        // setup the openWeatherApi key
+        // setup the openWeatherApi key "84431f2f4742d2281cb6c91f46e2074e"
         
     }
 }
