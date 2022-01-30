@@ -41,20 +41,23 @@ struct CityListView: View {
     var body: some View {
         Divider()
         VStack(spacing: 0) {
-            ForEach( cityList.cities ) {
-                CityListItemView(city: $0 )
-            }.onDelete(perform: $cityList.cities.remove )
+            List {
+                ForEach( cityList.cities ) {
+                    CityListItemView(city: $0 )
+                }
+                .onDelete(perform: $cityList.cities.remove )
                 .onMove(perform: $cityList.cities.move )
+            }
+            .navigationBarTitle("MyLocalWeather", displayMode: .inline)
+            .navigationBarBackButtonHidden(true)
+            .navigationBarItems(leading: EditButton(), trailing: Button(action: {
+                showAddCityAlert.toggle()
+            }) {
+                Image(systemName: "plus")
+            }.sheet(isPresented: $showAddCityAlert) {
+                AddCityView(group: cityList)
+            })
         }
-        .navigationBarTitle("MyLocalWeather", displayMode: .inline)
-        .navigationBarBackButtonHidden(true)
-        .navigationBarItems(leading: EditButton(), trailing: Button(action: {
-            showAddCityAlert.toggle()
-        }) {
-            Image(systemName: "plus")
-        }.sheet(isPresented: $showAddCityAlert) {
-            AddCityView(group: cityList)
-        })
         Spacer()
     }
 }
