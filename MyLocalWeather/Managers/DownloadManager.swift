@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 class DownloadManager {
     static var shared: DownloadManager { DownloadManager() }
@@ -20,40 +21,27 @@ class DownloadManager {
     func fetchOneCall(for city: City, block: @escaping (OneCall?, Error?)->Void ) {
         guard let location = city.location?.queryString,
               let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?appId=\(apiKey)\(location)") else { return }
-        
-        // TODO: save the publisher
-//        let session = URLSession.shared
-//            .dataTaskPublisher(for: url)
-//            .tryMap { element -> Data in
-//                guard let httpResponse = element.response as? HTTPURLResponse,
-//                      httpResponse.statusCode == 200 else {
-//                          throw URLError(.badServerResponse)
-//                      }
-//                return element.data
-//            }
-//            .decode(type: OneCall.self, decoder: JSONDecoder())
-//
-//        _ = session.sink(receiveCompletion: { print("received:\n \($0)") }, receiveValue: {
-//
-//                // $0 should be the OneCall struct
-//                print("received OneCall results: \($0)")
-//            })
-//
-        // Usage
-//        guard let url = URL(string: "https://www.amazon.com") else { return }
-        let sub = fetch(url: url)
-            .sink(receiveCompletion: { completion in
-            switch completion {
-            case .finished:
-                break
-            case .failure(let error):
-                print(error.localizedDescription)
+
+        let publisher = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let err = error {
+                print(err)
+                return
             }
-        }, receiveValue: { data in
-            guard let response = String(data: data, encoding: .utf8) else { return }
-            print(response)
-        })
-        subscriber = sub
+            guard let status = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= status else {
+                return
+            }
+            guard let data = data else { return }
+            do {
+                print( String(decoding: data, as: UTF8.self))
+                let values = try JSONDecoder().decode(OneCall.self, from: data)
+                print(values)
+            }
+            catch {
+                print(error)
+            }
+
+        }
+        publisher.resume()
     }
     
     

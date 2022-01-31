@@ -12,7 +12,7 @@ import SwiftUI
 
 struct OneCall: Codable {
     let coord: Coord
-    let weather: Weather
+    let weather: [Weather]
     let base: String
     let main: Main
     let visibility: Int
@@ -27,15 +27,24 @@ struct OneCall: Codable {
 }
 
 struct Coord: Codable {
-    let lat: Double
     let lon: Double
+    let lat: Double
 }
 
 struct Main: Codable  {
+    private enum CodingKeys: String, CodingKey {
+        case feelsLike = "feels_like"
+        case temp = "temp"
+        case tempMin = "temp_min"
+        case tempMax = "temp_max"
+        case pressure = "pressure"
+        case humidity = "humidity"
+    }
+    
     let temp: Double
     let feelsLike: Double
-    let temp_min: Double
-    let temp_max: Double
+    let tempMin: Double
+    let tempMax: Double
     let pressure: Int
     let humidity: Int
 }
@@ -43,7 +52,7 @@ struct Main: Codable  {
 struct Wind: Codable {
     let speed: Double
     let deg: Int
-    let gust: Double
+    let gust: Int?
 }
 
 struct Clouds: Codable {
