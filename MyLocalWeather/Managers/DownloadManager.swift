@@ -12,12 +12,12 @@ import SwiftUI
 
 
 class DownloadManager: ObservableObject {
-//    static var shared: DownloadManager { DownloadManager() }
+    static var shared: DownloadManager { DownloadManager() }
     
     // openWeather.org apiKey
     fileprivate let apiKey = "84431f2f4742d2281cb6c91f46e2074e"
 
-//    private init() {}
+    private init() {}
     
     func fetchOneCall(for city: City, block: @escaping (OneCall?, Error?)->Void ) {
         guard let location = city.location?.queryString,

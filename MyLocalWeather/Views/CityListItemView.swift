@@ -40,18 +40,20 @@ struct CityListItemView: View {
             .padding(6)
             .background(Color("LaunchScreenBackground", bundle: .main).edgesIgnoringSafeArea(.all))
         }
-        .onAppear{
+        .onAppear {
             cityName = $city.name.wrappedValue
-            DownloadManager().fetchOneCall(for: city, block: { (onCall, error) in
+            DownloadManager.shared.fetchOneCall(for: city) { (onCall, error) in
                 if let data = onCall {
                     if let weather = data.weather.first {
-                        let desc = "Feels like \(data.main.feelsLike). \(weather.main). \(weather.description)"
+                        let feelsLike = data.main.feelsLike.tempInF
+                        let desc = "Feels like \(feelsLike). \(weather.main). \(weather.description)"
                         self.feelsLike = desc
                     }
-                    let subtitle = "temp \(data.main.temp) Humidity: \( data.main.humidity )%"
+                    let temp = data.main.temp.tempInF
+                    let subtitle = "temp \(temp) Humidity: \( data.main.humidity )%"
                     self.tempHumidity = subtitle
                 }
-            })
+            }
         }
     }
 }
