@@ -26,20 +26,3 @@ final class City: Object, ObjectKeyIdentifiable {
         self.location = Location(loc: coord )
     }
 }
-
-final class Location: Object, ObjectKeyIdentifiable {
-    
-    @Persisted(primaryKey: true) var _id: ObjectId = ObjectId()
-    @Persisted var lat: Double
-    @Persisted var long: Double
-    
-    convenience init( lat: Double, lon: Double ) {
-        self.init()
-        self.lat = lat
-        self.long = lon
-    }
-    
-    convenience init(loc coord: CLLocationCoordinate2D ) {
-        self.init(lat: coord.latitude, lon: coord.longitude)
-    }
-}
