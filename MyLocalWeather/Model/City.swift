@@ -39,7 +39,7 @@ final class Location: Object, ObjectKeyIdentifiable {
         self.long = lon
     }
     
-    convenience init(loc                                       coord: CLLocationCoordinate2D ) {
+    convenience init(loc coord: CLLocationCoordinate2D ) {
         self.init(lat: coord.latitude, lon: coord.longitude)
     }
 }
