@@ -8,6 +8,7 @@
 import GooglePlaces
 import RealmSwift
 import SwiftUI
+import Combine
 
 /// View to host the Google Places view controller
 struct AddPlacesView: View {
@@ -44,7 +45,7 @@ struct PlacesViewController: UIViewControllerRepresentable {
 
     class Coordinator: NSObject, GMSAutocompleteViewControllerDelegate {
         @ObservedRealmObject var group: Group
-
+        
         func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
             guard let cityName = place.name  else { return }
             let coord = place.coordinate
@@ -53,6 +54,14 @@ struct PlacesViewController: UIViewControllerRepresentable {
             $group.cities.append(city)
             
             // todo: fetch weather info for this location
+            DownloadManager.shared.fetchOneCall(for: city) { (oneCall, error ) in
+                if let err = error {
+                    print( err.localizedDescription )
+                    return
+                }
+                guard let results = oneCall else { return }
+                print("\(results)")
+            }
             
             self.parent.presentationMode.wrappedValue.dismiss()
         }

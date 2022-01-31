@@ -39,6 +39,10 @@ struct CityListItemView: View {
             .padding(6)
             .background(Color("LaunchScreenBackground", bundle: .main).edgesIgnoringSafeArea(.all))
         }
+        .onAppear{
+            cityName = $city.name.wrappedValue
+            
+        }
     }
 }
 
