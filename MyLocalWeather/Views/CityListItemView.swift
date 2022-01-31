@@ -14,7 +14,7 @@ struct CityListItemView: View {
     @ObservedRealmObject var city: City
     
     @State var cityName: String = "CityName"
-    @State var icon: Image = Image("LaunchScreen", bundle: .main)
+    @State var icon: UIImage =  UIImage(named: "LaunchScreen") ?? UIImage()
     @State var tempHumidity: String = "temp xxx Humidity: xx%"
     @State var feelsLike: String = "Feels like xxx. clear sky. Light breeze "
     
@@ -23,7 +23,7 @@ struct CityListItemView: View {
             VStack(alignment: .leading, spacing: 0) {
                 HStack {
                     VStack {
-                        Image("LaunchScreen", bundle: .main).resizable()
+                        Image(uiImage: icon).resizable()
                             .scaledToFill().frame(width: 48, height: 48)
 
                     }
@@ -52,6 +52,10 @@ struct CityListItemView: View {
                     let temp = data.main.temp.tempInF
                     let subtitle = "temp \(temp) Humidity: \( data.main.humidity )%"
                     self.tempHumidity = subtitle
+                    
+                    if let iconString = data.weather.first?.icon {
+                        DownloadManager.shared.fetchWeatherIcon(iconString) { self.icon = $0 }
+                    }
                 }
             }
         }

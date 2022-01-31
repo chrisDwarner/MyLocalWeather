@@ -47,6 +47,28 @@ class DownloadManager: ObservableObject {
         }
         publisher.resume()
     }
+    
+    func fetchWeatherIcon(_ icon: String, block: @escaping (UIImage)->Void ) {
+        guard let url = URL(string: "https://openweathermap.org/img/w/\(icon).png") else {
+            return
+        }
+        
+        let publisher = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let _ = error {
+                return
+            }
+            
+            guard let status = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= status else {
+                return
+            }
+            guard let data = data else { return }
+            if let iconImage = UIImage(data: data) {
+                block( iconImage )
+            }
+        }
+        publisher.resume()
+
+    }
 }
 
 extension Location {
