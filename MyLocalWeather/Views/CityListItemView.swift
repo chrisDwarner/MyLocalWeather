@@ -5,6 +5,7 @@
 //  Created by chris warner on 1/28/22.
 //
 
+import Combine
 import SwiftUI
 import RealmSwift
 
@@ -41,7 +42,16 @@ struct CityListItemView: View {
         }
         .onAppear{
             cityName = $city.name.wrappedValue
-            
+            DownloadManager().fetchOneCall(for: city, block: { (onCall, error) in
+                if let data = onCall {
+                    if let weather = data.weather.first {
+                        let desc = "Feels like \(data.main.feelsLike). \(weather.main). \(weather.description)"
+                        self.feelsLike = desc
+                    }
+                    let subtitle = "temp \(data.main.temp) Humidity: \( data.main.humidity )%"
+                    self.tempHumidity = subtitle
+                }
+            })
         }
     }
 }

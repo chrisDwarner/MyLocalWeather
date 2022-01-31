@@ -50,19 +50,8 @@ struct PlacesViewController: UIViewControllerRepresentable {
             guard let cityName = place.name  else { return }
             let coord = place.coordinate
             let city = City(name: cityName, coord: coord)
-            
-            $group.cities.append(city)
-            
-            // todo: fetch weather info for this location
-            DownloadManager.shared.fetchOneCall(for: city) { (oneCall, error ) in
-                if let err = error {
-                    print( err.localizedDescription )
-                    return
-                }
-                guard let results = oneCall else { return }
-                print("\(results)")
-            }
-            
+
+            self.$group.cities.append(city)
             self.parent.presentationMode.wrappedValue.dismiss()
         }
         

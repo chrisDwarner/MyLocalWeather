@@ -20,5 +20,6 @@ struct MyLocalWeatherApp: App {
     init() {
         // setup google places
         GMSPlacesClient.provideAPIKey("AIzaSyDGATUosEFYd5bN4Ul4Zhaz_TAKZ8bCY90")
+        
     }
 }

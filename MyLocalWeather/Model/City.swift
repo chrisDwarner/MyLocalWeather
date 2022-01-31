@@ -19,26 +19,10 @@ final class City: Object, ObjectKeyIdentifiable {
     
     @Persisted(originProperty: "cities") var group: LinkingObjects<Group>
     
-    private var downloader = DownloadManager()
-    @Published var oneCall: OneCall!
-    
-
     convenience init( name: String, coord: CLLocationCoordinate2D ) {
         self.init()
         self._id = ObjectId.generate()
         self.name = name
         self.location = Location(loc: coord )
-        downloader.fetchOneCall(for: self, block: hanldler )
-    }
-    
-    func hanldler(_ oneCall: OneCall?, error: Error? ) {
-        
-        if let err = error {
-            print(err)
-            return
-        }
-
-        guard let weatherData = oneCall else { return }
-        self.oneCall = weatherData
     }
 }
