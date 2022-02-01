@@ -70,8 +70,38 @@ class DownloadManager: ObservableObject {
 
     }
     
-    func fetchOneCall(for city: City, block: @escaping (WeatherApi?, Error?)->Void ) {
-        
+    func fetchOneCall(for city: City, block: @escaping (OneCallApi?, Error?)->Void ) {
+        guard let location = city.location?.queryString,
+              let url = URL(string: "https://api.openweathermap.org/data/2.5/onecall?appId=\(apiKey)\(location)") else {
+                  block(nil, APIError.apiError(reason: "bad URL request"))
+                  return
+              }
+
+        let publisher = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let _ = error {
+                block( nil, error)
+                return
+            }
+            
+            guard let status = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= status else {
+                
+                block(nil, APIError.apiError(reason: "bad HTTP response"))
+                return
+            }
+            guard let data = data else { return }
+            do {
+                let values = try JSONDecoder().decode(OneCallApi.self, from: data)
+                block( values, nil )
+            }
+            catch DecodingError.keyNotFound {
+                
+            }
+            catch {
+                print(error)
+                block( nil, error)
+            }
+        }
+        publisher.resume()
     }
 }
 

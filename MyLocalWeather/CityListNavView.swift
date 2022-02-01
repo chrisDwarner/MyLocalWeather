@@ -14,12 +14,7 @@ struct CityListNavView: View {
 
     var body: some View {
         NavigationView {
-            if group.name == "Current" {
-                CityListView(cityList: group)
-            }else if group.name == "Hourly" {
-                // TODO: - need a new view for hourly readings
-                CityListView(cityList: group)
-            }
+            CityListView(cityList: group)
         }
     }
 }
@@ -35,11 +30,20 @@ struct CityListView: View {
         VStack(spacing: 0) {
             List {
                 ForEach( cityList.cities ) {
-                    CityListItemView(city: $0 )
-                        .background(Color("LaunchScreenBackground", bundle: .main).edgesIgnoringSafeArea(.all))
-                        .cornerRadius(6)
-                        .clipped()
-                        .listRowSeparator(.hidden)
+                    
+                    if cityList.name == "Current" {
+                        CurrentItemView(city: $0 )
+                            .background(Color("LaunchScreenBackground", bundle: .main).edgesIgnoringSafeArea(.all))
+                            .cornerRadius(6)
+                            .clipped()
+                            .listRowSeparator(.hidden)
+                    }else if cityList.name == "Hourly" {
+                        HourlyItemView(city: $0 )
+                            .background(Color("LaunchScreenBackground", bundle: .main).edgesIgnoringSafeArea(.all))
+                            .cornerRadius(6)
+                            .clipped()
+                            .listRowSeparator(.hidden)
+                    }
                }
                 .onDelete(perform: $cityList.cities.remove )
                 .onMove(perform: $cityList.cities.move )

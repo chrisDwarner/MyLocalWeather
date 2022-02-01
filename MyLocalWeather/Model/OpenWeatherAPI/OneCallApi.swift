@@ -34,6 +34,27 @@ struct OneCallApi: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
+//        do {
+//        }
+//        catch DecodingError.typeMismatch {
+//            // sometimes the wind speeds could be interpreted as Ints.  I see that behavior in the gust measurement
+//            self.lat = try Double(container.decode( Int.self, forKey: .lat))
+//        }
+//        catch DecodingError.keyNotFound {
+//            self.lat = 0.0
+//        }
+//
+//        do {
+//            self.lon = try container.decode( Double.self, forKey: .lon)
+//        }
+//        catch DecodingError.typeMismatch {
+//            // sometimes the wind speeds could be interpreted as Ints.  I see that behavior in the gust measurement
+//            self.lon = try Double(container.decode( Int.self, forKey: .lon))
+//        }
+//        catch DecodingError.keyNotFound {
+//            self.lon = 0.0
+//        }
+
         self.lat = try container.decode( Double.self, forKey: .lat)
         self.lon = try container.decode( Double.self, forKey: .lon)
         self.timezone = try container.decode( String.self, forKey: .timezone)
@@ -73,7 +94,7 @@ struct Current: Codable {
     let pressure: Int
     let humidity: Int
     let dew_point: Double
-    let uvi: Int
+    let uvi: Double
     let clouds: Int
     let visibility: Int
     let wind_speed: Double
@@ -89,7 +110,7 @@ struct Current: Codable {
          pressure: Int = 0,
          humidity: Int = 0,
          dew_point: Double = 0.0,
-         uvi: Int = 0,
+         uvi: Double = 0.0,
          clouds: Int = 0,
          visibility: Int = 0,
          wind_speed: Double = 0.0,
@@ -220,7 +241,7 @@ struct Daily: Codable {
     let sunset: Int
     let moonrise: Int
     let moonset: Int
-    let moon_phase: Int
+    let moon_phase: Double
     let temp: Temp
     let feels_like: FeelsLike
     let pressure: Int
@@ -264,7 +285,7 @@ struct Daily: Codable {
         self.sunset = try container.decode( Int.self, forKey: .sunset )
         self.moonrise = try container.decode( Int.self, forKey: .moonrise )
         self.moonset = try container.decode( Int.self, forKey: .moonset )
-        self.moon_phase = try container.decode( Int.self, forKey: .moon_phase )
+        self.moon_phase = try container.decode( Double.self, forKey: .moon_phase )
         self.temp = try container.decode( Temp.self, forKey: .temp )
         self.feels_like = try container.decode( FeelsLike.self, forKey: .feels_like )
         self.pressure = try container.decode( Int.self, forKey: .pressure )
@@ -285,7 +306,7 @@ struct Daily: Codable {
         sunset: Int = 0,
         moonrise: Int = 0,
         moonset: Int = 0,
-        moon_phase: Int = 0,
+        moon_phase: Double = 0,
         temp: Temp = Temp(),
         feels_like: FeelsLike = FeelsLike(),
         pressure: Int = 0,

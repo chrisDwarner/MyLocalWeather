@@ -1,5 +1,5 @@
 //
-//  CityListItemView.swift
+//  CurrentItemView.swift
 //  MyLocalWeather
 //
 //  Created by chris warner on 1/28/22.
@@ -9,7 +9,7 @@ import Combine
 import SwiftUI
 import RealmSwift
 
-struct CityListItemView: View {
+struct CurrentItemView: View {
     
     @ObservedRealmObject var city: City
     
@@ -63,9 +63,9 @@ struct CityListItemView: View {
 }
 
 #if DEBUG
-struct CityListItemView_Previews: PreviewProvider {
+struct CurrentItemView_Previews: PreviewProvider {
     static var previews: some View {
-        CityListItemView(city: City())
+        CurrentItemView(city: City())
             .previewLayout(.sizeThatFits).clipped()
     }
 }
