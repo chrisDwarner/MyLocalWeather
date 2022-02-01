@@ -105,11 +105,11 @@ class DownloadManager: ObservableObject {
     }
 }
 
+// exclusive private computed vars used in constructing a URL
 extension Location {
     
-    var queryString: String { "&lat=\(self.lat)&lon=\(self.long)" }
+    fileprivate var queryString: String { "&lat=\(self.lat)&lon=\(self.long)" }
 }
-
 
 extension DownloadManager {
 
@@ -126,24 +126,3 @@ extension DownloadManager {
     }
 }
 
-extension MyLocalWeatherApp {
-
-    func initDatabase() {
-        do {
-            let realm = try Realm()
-            
-            let groups = realm.objects(Group.self)
-            if groups.isEmpty {
-                realm.beginWrite()
-                realm.add(Group(name: "Current"), update: .all)
-                realm.add(Group(name: "Hourly"), update: .all)
-                
-                try realm.commitWrite()
-            }
-        }
-        catch {
-            print( error )
-        }
-
-    }
-}
