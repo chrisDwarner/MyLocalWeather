@@ -42,7 +42,7 @@ struct CityListItemView: View {
         }
         .onAppear {
             cityName = city.name
-            DownloadManager.shared.fetchOneCall(for: city) { (onCall, error) in
+            DownloadManager.shared.fetchWeather(for: city) { (onCall, error) in
                 if let data = onCall {
                     if let weather = data.weather.first {
                         let feelsLike = data.main.feelsLike.tempInF

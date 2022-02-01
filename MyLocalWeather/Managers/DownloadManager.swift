@@ -19,7 +19,7 @@ class DownloadManager: ObservableObject {
 
     private init() {}
     
-    func fetchOneCall(for city: City, block: @escaping (OneCall?, Error?)->Void ) {
+    func fetchWeather(for city: City, block: @escaping (WeatherApi?, Error?)->Void ) {
         guard let location = city.location?.queryString,
               let url = URL(string: "https://api.openweathermap.org/data/2.5/weather?appId=\(apiKey)\(location)") else {
                   block(nil, APIError.apiError(reason: "bad URL request"))
@@ -38,7 +38,7 @@ class DownloadManager: ObservableObject {
             }
             guard let data = data else { return }
             do {
-                let values = try JSONDecoder().decode(OneCall.self, from: data)
+                let values = try JSONDecoder().decode(WeatherApi.self, from: data)
                 block( values, nil )
             }
             catch {
@@ -68,6 +68,10 @@ class DownloadManager: ObservableObject {
         }
         publisher.resume()
 
+    }
+    
+    func fetchOneCall(for city: City, block: @escaping (WeatherApi?, Error?)->Void ) {
+        
     }
 }
 

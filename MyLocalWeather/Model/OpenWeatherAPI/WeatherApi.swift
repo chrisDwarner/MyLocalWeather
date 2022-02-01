@@ -10,7 +10,7 @@ import CoreLocation
 import SwiftUI
 
 
-struct OneCall: Codable {
+struct WeatherApi: Codable {
     let coord: Coord
     let weather: [Weather]
     let base: String
