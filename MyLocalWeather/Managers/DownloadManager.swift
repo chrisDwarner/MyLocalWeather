@@ -91,3 +91,25 @@ extension DownloadManager {
         }
     }
 }
+
+extension MyLocalWeatherApp {
+
+    func initDatabase() {
+        do {
+            let realm = try Realm()
+            
+            let groups = realm.objects(Group.self)
+            if groups.isEmpty {
+                realm.beginWrite()
+                realm.add(Group(name: "Current"), update: .all)
+                realm.add(Group(name: "Hourly"), update: .all)
+                
+                try realm.commitWrite()
+            }
+        }
+        catch {
+            print( error )
+        }
+
+    }
+}

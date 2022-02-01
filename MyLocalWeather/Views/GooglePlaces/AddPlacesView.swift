@@ -51,7 +51,23 @@ struct PlacesViewController: UIViewControllerRepresentable {
             let coord = place.coordinate
             let city = City(name: cityName, coord: coord)
 
-            self.$group.cities.append(city)
+            do {
+                let realm = try Realm()
+                
+                let groups = realm.objects(Group.self)
+                
+                if !groups.isEmpty {
+                    realm.beginWrite()
+                    groups.forEach { group in
+                        group.cities.append(city)
+                        realm.add(group, update: .modified)
+                    }
+                    try realm.commitWrite()
+                }
+            }
+            catch {
+                print( error )
+            }
             self.parent.presentationMode.wrappedValue.dismiss()
         }
         

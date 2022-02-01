@@ -12,7 +12,7 @@ import GooglePlaces
 struct MyLocalWeatherApp: App {
     var body: some Scene {
         WindowGroup {
-            CityListNavView()
+            ForecastView()
         }
     }
     
@@ -20,6 +20,7 @@ struct MyLocalWeatherApp: App {
     init() {
         // setup google places
         GMSPlacesClient.provideAPIKey("AIzaSyDGATUosEFYd5bN4Ul4Zhaz_TAKZ8bCY90")
-        
+            
+        initDatabase()
     }
 }

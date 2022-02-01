@@ -12,7 +12,12 @@ import RealmSwift
 ///  Groups can be used for organizing city forecasts in collections (i.e favorites, etc..)
 final class Group: Object, ObjectKeyIdentifiable {
     @Persisted(primaryKey: true) var _id: ObjectId
-    @Persisted var name: String = "all"
+    @Persisted var name: String
 
     @Persisted var cities = RealmSwift.List<City>()
+    
+    convenience init( name: String ) {
+        self.init()
+        self.name = name
+    }
 }
