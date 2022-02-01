@@ -28,6 +28,7 @@
 		83A99BE327A886BB00F01F0E /* Double+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A99BE227A886BB00F01F0E /* Double+extension.swift */; };
 		83A99BE527A8935600F01F0E /* ForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A99BE427A8935600F01F0E /* ForecastView.swift */; };
 		83A99BE727A8CC4C00F01F0E /* OneCallApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A99BE627A8CC4C00F01F0E /* OneCallApi.swift */; };
+		83A99BE927A8D4D300F01F0E /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A99BE827A8D4D300F01F0E /* Weather.swift */; };
 		83AE5EC527A7075B00A9289D /* AddPlacesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AE5EC427A7075B00A9289D /* AddPlacesView.swift */; };
 /* End PBXBuildFile section */
 
@@ -72,6 +73,7 @@
 		83A99BE227A886BB00F01F0E /* Double+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+extension.swift"; sourceTree = "<group>"; };
 		83A99BE427A8935600F01F0E /* ForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForecastView.swift; sourceTree = "<group>"; };
 		83A99BE627A8CC4C00F01F0E /* OneCallApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCallApi.swift; sourceTree = "<group>"; };
+		83A99BE827A8D4D300F01F0E /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		83AE5EC427A7075B00A9289D /* AddPlacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlacesView.swift; sourceTree = "<group>"; };
 		8ADD9971320D671AF820A7A8 /* Pods-MyLocalWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyLocalWeather.debug.xcconfig"; path = "Target Support Files/Pods-MyLocalWeather/Pods-MyLocalWeather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -119,6 +121,7 @@
 			children = (
 				8311283827A74DDB002428B5 /* WeatherApi.swift */,
 				83A99BE627A8CC4C00F01F0E /* OneCallApi.swift */,
+				83A99BE827A8D4D300F01F0E /* Weather.swift */,
 			);
 			path = OpenWeatherAPI;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				8311284027A77577002428B5 /* Location.swift in Sources */,
 				83AE5EC527A7075B00A9289D /* AddPlacesView.swift in Sources */,
 				83A1DFF427A4582200E047B4 /* CityListNavView.swift in Sources */,
+				83A99BE927A8D4D300F01F0E /* Weather.swift in Sources */,
 				8361F58327A4D6C700E7D4EC /* Group.swift in Sources */,
 				8311283927A74DDB002428B5 /* WeatherApi.swift in Sources */,
 				83A1E02427A4A8FB00E047B4 /* City.swift in Sources */,
