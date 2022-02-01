@@ -41,7 +41,7 @@ struct CityListItemView: View {
             .background(Color("LaunchScreenBackground", bundle: .main).edgesIgnoringSafeArea(.all))
         }
         .onAppear {
-            cityName = $city.name.wrappedValue
+            cityName = city.name
             DownloadManager.shared.fetchOneCall(for: city) { (onCall, error) in
                 if let data = onCall {
                     if let weather = data.weather.first {

@@ -10,19 +10,11 @@ import SwiftUI
 
 /// the default city list view with a navigation view
 struct CityListNavView: View {
-    
-    @ObservedResults(Group.self) var cityList
-    
+    @ObservedRealmObject var group: Group
+
     var body: some View {
         NavigationView {
-            if let cities = cityList.first {
-                CityListView(cityList: cities)
-            }
-            else {
-                ProgressView().onAppear {
-                    $cityList.append(Group())
-                }
-            }
+            CityListView(cityList: group)
         }
     }
 }
@@ -46,7 +38,7 @@ struct CityListView: View {
                 .onDelete(perform: $cityList.cities.remove )
                 .onMove(perform: $cityList.cities.move )
             }
-            .navigationBarTitle("MyLocalWeather", displayMode: .inline)
+            .navigationBarTitle(cityList.name, displayMode: .inline)
             .navigationBarBackButtonHidden(true)
             .navigationBarItems(leading: EditButton(), trailing: Button(action: {
                 showAddCityAlert.toggle()
@@ -63,7 +55,7 @@ struct CityListView: View {
 #if DEBUG
 struct CityListNavView_Previews: PreviewProvider {
     static var previews: some View {
-        CityListNavView()
+        CityListNavView(group: Group())
     }
 }
 #endif
