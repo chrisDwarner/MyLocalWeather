@@ -74,24 +74,22 @@ struct OneCallApi: Codable {
         }
         return dataSet
     }
-
-    var minDailyTempChart: [TestChartData] {
-
-        var dataSet: [TestChartData] = []
-        daily.forEach { day in
-            dataSet.append( TestChartData(label: day.dt.dayString, value: day.temp.min.kelvinInF) )
-        }
-        return dataSet
-    }
     
-    var maxDailyTempChart: [TestChartData] {
-
-        var dataSet: [TestChartData] = []
-        daily.forEach { day in
-            dataSet.append( TestChartData(label: day.dt.dayString, value: day.temp.max.kelvinInF) )
+    var hourlyObservations: [HourlyModel] {
+        var observations: [HourlyModel] = []
+        
+        hourly.forEach { hourly in
+            if let icon = hourly.weather.first?.icon {
+                observations.append(HourlyModel(icon: icon,
+                                                timeStamp: hourly.dt.timeString,
+                                                temp: hourly.temp.tempInF,
+                                                visiblity: "\(hourly.visibility)"))
+            }
         }
-        return dataSet
+        
+        return observations
     }
+
 }
 
 struct Current: Codable {
@@ -127,6 +125,7 @@ struct Current: Codable {
          wind_deg: Int = 0,
          wind_gust: Double = 0.0,
          weather: [Weather] = []) {
+        
         self.dt = dt
         self.sunrise = sunrise
         self.sunset = sunset
@@ -177,8 +176,9 @@ struct Minutely: Codable {
     }
 }
 
-struct Hourly: Codable {
-    
+struct Hourly: Codable, Identifiable {
+    var id: UUID = UUID()
+
     let dt: Int
     let temp: Double
     let feels_like: Double
@@ -194,7 +194,26 @@ struct Hourly: Codable {
     let weather: [Weather]
     let pop: Double
     
+    private enum CodingKeys: String, CodingKey {
+        case dt = "dt"
+        case temp = "temp"
+        case feels_like = "feels_like"
+        case pressure = "pressure"
+        case humidity = "humidity"
+        case dew_point = "dew_point"
+        case uvi = "uvi"
+        case clouds = "clouds"
+        case visibility = "visibility"
+        case wind_speed = "wind_speed"
+        case wind_deg = "wind_deg"
+        case wind_gust = "wind_gust"
+        case weather = "weather"
+        case pop = "pop"
+    }
+    
     init(from decoder: Decoder) throws {
+        self.id = UUID()
+
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.dt = try container.decode(Int.self, forKey: .dt)
@@ -223,7 +242,7 @@ struct Hourly: Codable {
             self.pop = 0.0
         }
     }
-    
+
     init(dt: Int = 0,
          temp: Double = 0.0,
          feels_like: Double = 0.0,
@@ -238,6 +257,8 @@ struct Hourly: Codable {
          wind_gust: Double = 0.0,
          weather: [Weather] = [],
          pop: Double = 0 ) {
+
+        self.id = UUID()
         self.dt = dt
         self.temp = temp
         self.feels_like = feels_like
