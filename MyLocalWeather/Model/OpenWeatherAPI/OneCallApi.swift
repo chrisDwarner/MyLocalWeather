@@ -33,27 +33,6 @@ struct OneCallApi: Codable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        
-//        do {
-//        }
-//        catch DecodingError.typeMismatch {
-//            // sometimes the wind speeds could be interpreted as Ints.  I see that behavior in the gust measurement
-//            self.lat = try Double(container.decode( Int.self, forKey: .lat))
-//        }
-//        catch DecodingError.keyNotFound {
-//            self.lat = 0.0
-//        }
-//
-//        do {
-//            self.lon = try container.decode( Double.self, forKey: .lon)
-//        }
-//        catch DecodingError.typeMismatch {
-//            // sometimes the wind speeds could be interpreted as Ints.  I see that behavior in the gust measurement
-//            self.lon = try Double(container.decode( Int.self, forKey: .lon))
-//        }
-//        catch DecodingError.keyNotFound {
-//            self.lon = 0.0
-//        }
 
         self.lat = try container.decode( Double.self, forKey: .lat)
         self.lon = try container.decode( Double.self, forKey: .lon)
@@ -81,6 +60,37 @@ struct OneCallApi: Codable {
         self.minutely = minutely
         self.hourly = hourly
         self.daily = daily
+    }
+    
+    var dailyTempChartData: [TempMinMaxModel] {
+
+        var dataSet: [TempMinMaxModel] = []
+        daily.forEach { day in
+            dataSet.append( TempMinMaxModel(month: day.dt.dayString, value: day.temp.min.kelvinInF, name: "Min Temp") )
+        }
+
+        daily.forEach { day in
+            dataSet.append( TempMinMaxModel(month: day.dt.dayString, value: day.temp.max.kelvinInF, name: "Max Temp") )
+        }
+        return dataSet
+    }
+
+    var minDailyTempChart: [TestChartData] {
+
+        var dataSet: [TestChartData] = []
+        daily.forEach { day in
+            dataSet.append( TestChartData(label: day.dt.dayString, value: day.temp.min.kelvinInF) )
+        }
+        return dataSet
+    }
+    
+    var maxDailyTempChart: [TestChartData] {
+
+        var dataSet: [TestChartData] = []
+        daily.forEach { day in
+            dataSet.append( TestChartData(label: day.dt.dayString, value: day.temp.max.kelvinInF) )
+        }
+        return dataSet
     }
 }
 
@@ -182,7 +192,7 @@ struct Hourly: Codable {
     let wind_deg: Int
     let wind_gust: Double
     let weather: [Weather]
-    let pop: Int
+    let pop: Double
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -200,8 +210,18 @@ struct Hourly: Codable {
         self.wind_deg = try container.decode( Int.self, forKey: .wind_deg)
         self.wind_gust = try container.decode( Double.self, forKey: .wind_gust)
         self.weather = try container.decode( [Weather].self, forKey: .weather)
-        self.pop = try container.decode( Int.self, forKey: .pop)
         
+        do {
+            self.pop = try container.decode( Double.self, forKey: .pop)
+        }
+        catch DecodingError.typeMismatch {
+            // sometimes the wind speeds could be interpreted as Ints.  I see that behavior in the gust measurement
+            
+            self.pop = try Double( container.decode( Int.self, forKey: .pop))
+        }
+        catch DecodingError.keyNotFound {
+            self.pop = 0.0
+        }
     }
     
     init(dt: Int = 0,
@@ -217,7 +237,7 @@ struct Hourly: Codable {
          wind_deg: Int = 0,
          wind_gust: Double = 0.0,
          weather: [Weather] = [],
-         pop: Int = 0 ) {
+         pop: Double = 0 ) {
         self.dt = dt
         self.temp = temp
         self.feels_like = feels_like
@@ -235,7 +255,9 @@ struct Hourly: Codable {
     }
 }
 
-struct Daily: Codable {
+struct Daily: Codable, Identifiable {
+    var id: ObjectIdentifier
+    
     let dt: Int
     let sunrise: Int
     let sunset: Int
@@ -252,7 +274,7 @@ struct Daily: Codable {
     let wind_gust: Double
     let weather: [Weather]
     let clouds: Int
-    let pop: Int
+    let pop: Double
     let uvi: Double
     
     
@@ -278,6 +300,9 @@ struct Daily: Codable {
     }
     
     init(from decoder: Decoder) throws {
+        
+        self.id = ObjectIdentifier(Daily.self)
+        
         let container = try decoder.container(keyedBy: CodingKeys.self)
         
         self.dt = try container.decode( Int.self, forKey: .dt )
@@ -296,7 +321,19 @@ struct Daily: Codable {
         self.wind_gust = try container.decode( Double.self, forKey: .wind_gust )
         self.weather = try container.decode( [Weather].self, forKey: .weather )
         self.clouds = try container.decode( Int.self, forKey: .clouds )
-        self.pop = try container.decode( Int.self, forKey: .pop )
+
+        do {
+            self.pop = try container.decode( Double.self, forKey: .pop)
+        }
+        catch DecodingError.typeMismatch {
+            // sometimes the wind speeds could be interpreted as Ints.  I see that behavior in the gust measurement
+            
+            self.pop = try Double( container.decode( Int.self, forKey: .pop))
+        }
+        catch DecodingError.keyNotFound {
+            self.pop = 0.0
+        }
+
         self.uvi = try container.decode( Double.self, forKey: .uvi )
     }
     
@@ -317,9 +354,10 @@ struct Daily: Codable {
         wind_gust: Double = 0,
         weather: [Weather] = [],
         clouds: Int = 0,
-        pop: Int = 0,
+        pop: Double = 0,
         uvi: Double = 0)
     {
+        self.id = ObjectIdentifier(Daily.self)
         self.dt = dt
         self.sunrise = sunrise
         self.sunset = sunset

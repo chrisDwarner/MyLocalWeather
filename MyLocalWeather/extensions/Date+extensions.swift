@@ -22,4 +22,12 @@ extension Date {
         let seconds = -TimeInterval(timezone.secondsFromGMT(for: self))
         return Date(timeInterval: seconds, since: self)
     }
+    
+    var dayOfWeek: String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "eee"
+        return dateFormatter.string(from: self).capitalized
+        // or use capitalized(with: locale) if you want
+    }
+
 }

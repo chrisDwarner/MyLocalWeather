@@ -28,4 +28,17 @@ extension Int {
         }
         return ""
     }
+    
+    var dayString: String {
+        let formatter = DateFormatter()
+        
+        if !timeIntervalValue.isInfinite && !timeIntervalValue.isNaN {
+            let date = Date(timeIntervalSince1970: timeIntervalValue)// .toLocalTime()
+            
+            formatter.dateFormat = "eee"
+            let string = formatter.string(from: date)
+            return string
+        }
+        return ""
+    }
 }
