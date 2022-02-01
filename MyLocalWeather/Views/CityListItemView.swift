@@ -62,9 +62,11 @@ struct CityListItemView: View {
     }
 }
 
+#if DEBUG
 struct CityListItemView_Previews: PreviewProvider {
     static var previews: some View {
         CityListItemView(city: City())
             .previewLayout(.sizeThatFits).clipped()
     }
 }
+#endif
