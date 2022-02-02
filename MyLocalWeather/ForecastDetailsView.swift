@@ -10,14 +10,6 @@ import SwiftUI
 import PrettyAxis
 
 
-let minStrokeColor = Color(red: 32/255, green: 145/255, blue: 40/255, opacity: 1)
-let tempRange: [Color] = [.red, minStrokeColor, .black]
-let minTempRangeStroke: [Color] = [minStrokeColor, minStrokeColor, minStrokeColor]
-let minTempFill = LinearGradient(colors: tempRange.map({$0.opacity(0.8)}), startPoint: .top, endPoint: .bottom)
-let maxTempFill = LinearGradient(colors:  tempRange.map({$0.opacity(0.6)}), startPoint: .top, endPoint: .bottom)
-let minTempStroke = LinearGradient(colors: minTempRangeStroke, startPoint: .top, endPoint: .bottom)
-let maxTempStroke = LinearGradient(colors:  tempRange, startPoint: .top, endPoint: .bottom)
-
 struct ForecastDetailsView: View {
     
     @ObservedRealmObject var city: City
@@ -86,18 +78,18 @@ struct ForecastDetailsView: View {
     @ViewBuilder
     var dailyMinMax: some View {
         
-        let stroke = ["Min Temp": minTempStroke, "Max Temp": maxTempStroke]
-        let fill = ["Min Temp": minTempFill, "Max Temp": maxTempFill]
+        let stroke = ["Min Temp": LinearGradient.minTempStroke, "Max Temp": LinearGradient.maxTempStroke]
+        let fill = ["Min Temp": LinearGradient.minTempFill, "Max Temp": LinearGradient.maxTempFill]
         
         if !tempMinMax.isEmpty {
             
             AxisView(style: .line, data: tempMinMax)
                 .stroke(stroke)
                 .fill(fill)
-                .labelColor(Color.black)
+                .labelColor(Color.houlyFontColor)
                 .referenceLine(style: ReferenceLineStyle(axisColor: Color.gray))
                 .spacing(40)
-                .enableLegend(true, style: LegendStyle(labelColor: Color.gray))
+                .enableLegend(true, style: LegendStyle(labelColor: Color.houlyFontColor))
                 .fromZero(false)
                 .padding()
         }
@@ -140,9 +132,7 @@ struct ForecastDetailsView: View {
                     DownloadManager.shared.fetchWeatherIcon(iconString) { self.icon = $0 }
                 }
 
-                let compassHeading = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
-                let index = Int((Double(data.current.wind_deg) / 360.0) / 22.5) + 1
-                let compassDir = compassHeading[index]
+                let compassDir = data.current.compassHeading
                 self.windInfo = "Wind speed: \(data.current.wind_speed)m/s \(compassDir) Dew point: \(data.current.dew_point.tempInF)"
             }
         }

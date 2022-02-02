@@ -39,6 +39,8 @@
 		83A99BE927A8D4D300F01F0E /* Weather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83A99BE827A8D4D300F01F0E /* Weather.swift */; };
 		83AE5EC527A7075B00A9289D /* AddPlacesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83AE5EC427A7075B00A9289D /* AddPlacesView.swift */; };
 		83C9EE2027A9F46D00B86F01 /* HourlyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83C9EE1F27A9F46D00B86F01 /* HourlyModel.swift */; };
+		83E7532D27AAE95E008D412F /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7532C27AAE95E008D412F /* Color+Extension.swift */; };
+		83E7532F27AAEB72008D412F /* LinearGradient+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7532E27AAEB72008D412F /* LinearGradient+extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +94,8 @@
 		83A99BE827A8D4D300F01F0E /* Weather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weather.swift; sourceTree = "<group>"; };
 		83AE5EC427A7075B00A9289D /* AddPlacesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPlacesView.swift; sourceTree = "<group>"; };
 		83C9EE1F27A9F46D00B86F01 /* HourlyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyModel.swift; sourceTree = "<group>"; };
+		83E7532C27AAE95E008D412F /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		83E7532E27AAEB72008D412F /* LinearGradient+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LinearGradient+extensions.swift"; sourceTree = "<group>"; };
 		8ADD9971320D671AF820A7A8 /* Pods-MyLocalWeather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyLocalWeather.debug.xcconfig"; path = "Target Support Files/Pods-MyLocalWeather/Pods-MyLocalWeather.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -256,6 +260,8 @@
 				8358FC7B27A9980300229D5F /* Int+extensions.swift */,
 				8358FC7D27A9A6D200229D5F /* Date+extensions.swift */,
 				8358FC7F27A9A77200229D5F /* MyLocalWeatherApp+extensions.swift */,
+				83E7532C27AAE95E008D412F /* Color+Extension.swift */,
+				83E7532E27AAEB72008D412F /* LinearGradient+extensions.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -482,6 +488,8 @@
 				8358FC7A27A9928A00229D5F /* HourlyItemView.swift in Sources */,
 				83A1DFF227A4582200E047B4 /* MyLocalWeatherApp.swift in Sources */,
 				83A99BE527A8935600F01F0E /* ForecastView.swift in Sources */,
+				83E7532F27AAEB72008D412F /* LinearGradient+extensions.swift in Sources */,
+				83E7532D27AAE95E008D412F /* Color+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

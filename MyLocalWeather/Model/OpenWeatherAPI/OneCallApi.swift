@@ -144,6 +144,13 @@ struct Current: Codable {
         self.wind_gust = wind_gust
         self.weather = weather
     }
+    
+    var compassHeading: String {
+        let compassHeading = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
+        let index = Int((Double(self.wind_deg) / 360.0) / 22.5) + 1
+        let compassDir = compassHeading[index]
+        return compassDir
+    }
 }
 
 struct Minutely: Codable {

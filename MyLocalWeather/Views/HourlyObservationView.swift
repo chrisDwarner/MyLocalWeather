@@ -17,14 +17,17 @@ struct HourlyObservationView: View {
     var body: some View {
         VStack {
             Text(timeStamp).font(.caption)
+                .foregroundColor(Color.houlyFontColor)
             Divider()
             HStack {
                 Image(uiImage: icon).resizable()
                     .scaledToFill().frame(width: 48, height: 48)
                 Text(temp).font(.footnote)
+                    .foregroundColor(Color.houlyFontColor)
             }
             Divider()
             Text(visiblity).font(.caption2)
+                .foregroundColor(Color.houlyFontColor)
         }
         .onAppear {
             self.timeStamp = hourly.timeStamp
