@@ -31,35 +31,41 @@ struct ForecastDetailsView: View {
 
     var body: some View {
         let bg = RoundedRectangle(cornerRadius: 15).foregroundColor(Color(white: 0.9))
-        VStack {
-            Text(city.name).font(.title).bold()
-            Current
-                .frame(maxWidth: .infinity)
-                .padding(.horizontal)
-            Divider()
-            Text("Daily Min Max temps")
-            dailyMinMax.frame(height: 200)
+        ScrollView {
+            VStack {
+                Text(city.name).font(.title).bold()
+                Current
+                    .frame(maxWidth: .infinity)
+                    .padding(.horizontal)
+                Divider()
+                Text("Daily Min Max temps")
+                dailyMinMax.frame(height: 200)
+                    .frame(maxWidth: .infinity)
+                    .background(bg)
+                    .padding(.horizontal)
+                Divider()
+                Text("Hourly Observations")
+                hourlyObservations.frame(height: 130)
                 .frame(maxWidth: .infinity)
                 .background(bg)
                 .padding(.horizontal)
-            Divider()
-            Text("Hourly Observations")
-            hourlyObservations.frame(height: 130)
-            .frame(maxWidth: .infinity)
-            .background(bg)
-            .padding(.horizontal)
-        }
-        .gesture(DragGesture(minimumDistance: 10, coordinateSpace: .local).onEnded({ value in
-            if value.translation.height > 0 {
-                // down
-                refresh()
             }
-        }))
+            .gesture(DragGesture(minimumDistance: 10, coordinateSpace: .local).onEnded({ value in
+                if value.translation.height > 0 {
+                    // swipe down detected, refresh the view
+                    refresh()
+                }
+            }))
+        }
         .onAppear(perform: {
             refresh()
         })
     }
     
+    // with swiftUI there is a hard limit on the number of elements in the main body.
+    // When you exceed that, SwiftUI and XCode go full on weird
+    // to get around that, and to help execution times, break down the UI elements in to
+    // smaller building blocks with sub-views using @ViewBuilder
     @ViewBuilder
     var Current: some View {
         Divider()
@@ -75,6 +81,7 @@ struct ForecastDetailsView: View {
         Text(windInfo).font(.caption2)
     }
     
+    // Daily min max temp chart view
     @ViewBuilder
     var dailyMinMax: some View {
         
@@ -95,6 +102,7 @@ struct ForecastDetailsView: View {
         }
     }
     
+    // hourly observations view
     @ViewBuilder
     var hourlyObservations: some View {
         let bg = RoundedRectangle(cornerRadius: 15).foregroundColor(Color(white: 0.9))

@@ -25,7 +25,6 @@ struct CurrentItemView: View {
                     VStack {
                         Image(uiImage: icon).resizable()
                             .scaledToFill().frame(width: 48, height: 48)
-
                     }
                     VStack(alignment: .leading, spacing: 4) {
                         Text(cityName)

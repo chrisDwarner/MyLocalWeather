@@ -22,6 +22,10 @@ struct AddPlacesView: View {
     }
 }
 
+/// PlacesViewController is a UIViewControllerRepresentable that  lauches
+///  the Google places  GMSAutocompleteViewController
+/// this view controller is a UIKit based control so we need to wrap it
+/// in the UIViewControllerRepresentable for display in SwiftUI
 struct PlacesViewController: UIViewControllerRepresentable {
     typealias UIViewControllerType = GMSAutocompleteViewController
     
@@ -43,9 +47,14 @@ struct PlacesViewController: UIViewControllerRepresentable {
         return controller
     }
 
+    // the coordinator class holds the delegate implementation of the hosted UIViewController.
+    // this is how we communicate between SwiftUI and UIKit hosted viewControllers
     class Coordinator: NSObject, GMSAutocompleteViewControllerDelegate {
         @ObservedRealmObject var group: Group
+        let parent: PlacesViewController  // we hold a reference to the parent View so we can dismiss it
         
+
+        // user selected a city
         func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
             guard let cityName = place.name  else { return }
             let coord = place.coordinate
@@ -56,6 +65,7 @@ struct PlacesViewController: UIViewControllerRepresentable {
                 
                 let groups = realm.objects(Group.self)
                 
+                // can't add a city with no groups.  This should never happen
                 if !groups.isEmpty {
                     realm.beginWrite()
                     groups.forEach { group in
@@ -80,8 +90,6 @@ struct PlacesViewController: UIViewControllerRepresentable {
             print("canceled")
             self.parent.presentationMode.wrappedValue.dismiss()
         }
-        
-        let parent: PlacesViewController
         
         init(_ parent: PlacesViewController, group: Group) {
             self.parent = parent

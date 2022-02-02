@@ -15,6 +15,8 @@ extension MyLocalWeatherApp {
     //  messes with SwiftUI's version of 'App'.  How cool is that?
     func initDatabase() {
         do {
+            
+            // Here is where we would setup the Realm configuration for encryption, migration, etc.
             let realm = try Realm()
             
             let groups = realm.objects(Group.self)
