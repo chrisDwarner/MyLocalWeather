@@ -27,24 +27,15 @@ struct ForecastDetailsView: View {
     @State var temp: String = "Temp"
     @State var feelsLike: String = "feels like"
     @State var currentConditions: String = "Current Conditions"
+    @State var windInfo: String = "00.0m/s N"
 
     var body: some View {
         let bg = RoundedRectangle(cornerRadius: 15).foregroundColor(Color(white: 0.9))
         VStack {
-            Text(city.name)
-            Divider()
-            Text(currentConditions)
-            HStack {
-                Image(uiImage: icon).resizable()
-                    .scaledToFill().frame(width: 100, height: 100)
-                VStack(alignment: .leading) {
-                    Text(temp)
-                    Text(feelsLike)
-                }
-            }
-            
-            
-
+            Text(city.name).font(.title).bold()
+            Current
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal)
             Divider()
             Text("Daily Min Max temps")
             dailyMinMax.frame(height: 200)
@@ -53,15 +44,7 @@ struct ForecastDetailsView: View {
                 .padding(.horizontal)
             Divider()
             Text("Hourly Observations")
-            ScrollView (.horizontal, showsIndicators: false) {
-                HStack(spacing: 8) {
-                    ForEach(hourlyReadings, id: \.id) { hourly in
-                        HourlyObservationView(hourly: hourly )
-                    }
-                }
-                .background(bg)
-            }
-            .frame(height: 130)
+            hourlyObservations.frame(height: 130)
             .frame(maxWidth: .infinity)
             .background(bg)
             .padding(.horizontal)
@@ -89,9 +72,28 @@ struct ForecastDetailsView: View {
                         DownloadManager.shared.fetchWeatherIcon(iconString) { self.icon = $0 }
                     }
 
+                    let compassHeading = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
+                    let index = Int((Double(data.current.wind_deg) / 360.0) / 22.5) + 1
+                    let compassDir = compassHeading[index]
+                    self.windInfo = "Wind speed: \(data.current.wind_speed)m/s \(compassDir) Dew point: \(data.current.dew_point.tempInF)"
                 }
             }
         })
+    }
+    
+    @ViewBuilder
+    var Current: some View {
+        Divider()
+        Text(currentConditions).font(.headline)
+        HStack {
+            Image(uiImage: icon).resizable()
+                .scaledToFill().frame(width: 100, height: 100)
+            VStack(alignment: .leading) {
+                Text(temp).font(.caption)
+                Text(feelsLike).font(.caption)
+            }
+        }
+        Text(windInfo).font(.caption2)
     }
     
     @ViewBuilder
@@ -116,20 +118,14 @@ struct ForecastDetailsView: View {
     
     @ViewBuilder
     var hourlyObservations: some View {
-        
-        let stroke = ["Min Temp": minTempStroke, "Max Temp": maxTempStroke]
-        let fill = ["Min Temp": minTempFill, "Max Temp": maxTempFill]
-        
-        if !hourlyReadings.isEmpty {
-            AxisView(style: .line, data: tempMinMax)
-                .stroke(stroke)
-                .fill(fill)
-                .labelColor(Color.black)
-                .referenceLine(style: ReferenceLineStyle(axisColor: Color.gray))
-                .spacing(40)
-                .enableLegend(true, style: LegendStyle(labelColor: Color.gray))
-                .fromZero(false)
-                .padding()
+        let bg = RoundedRectangle(cornerRadius: 15).foregroundColor(Color(white: 0.9))
+        ScrollView (.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(hourlyReadings, id: \.id) { hourly in
+                    HourlyObservationView(hourly: hourly )
+                }
+            }
+            .background(bg)
         }
     }
 }
