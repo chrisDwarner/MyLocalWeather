@@ -49,35 +49,14 @@ struct ForecastDetailsView: View {
             .background(bg)
             .padding(.horizontal)
         }
-        .onAppear(perform: {
-            DownloadManager.shared.fetchOneCall(for: city) { (onCall, error) in
-                if let data = onCall {
-                    let dataset = data.dailyTempChartData
-                    self.tempMinMax = dataset
-                    let readings  = data.hourlyObservations
-                    self.hourlyReadings = readings
-                    self.temp = "Temp: \(data.current.temp.tempInF)"
-                    self.feelsLike = "Feels Like:\(data.current.feels_like.tempInF)"
-                    
-                    let dt = Date(timeIntervalSince1970: data.current.dt.timeIntervalValue )
-                    let formatter = DateFormatter()
-                    
-                    formatter.dateFormat = "MMM d"
-
-                    let dateStr = formatter.string(from: dt)
-
-                    self.currentConditions = "Current Conditions - \(dateStr), \(data.current.dt.timeString)"
-                    
-                    if let iconString = data.current.weather.first?.icon {
-                        DownloadManager.shared.fetchWeatherIcon(iconString) { self.icon = $0 }
-                    }
-
-                    let compassHeading = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
-                    let index = Int((Double(data.current.wind_deg) / 360.0) / 22.5) + 1
-                    let compassDir = compassHeading[index]
-                    self.windInfo = "Wind speed: \(data.current.wind_speed)m/s \(compassDir) Dew point: \(data.current.dew_point.tempInF)"
-                }
+        .gesture(DragGesture(minimumDistance: 10, coordinateSpace: .local).onEnded({ value in
+            if value.translation.height > 0 {
+                // down
+                refresh()
             }
+        }))
+        .onAppear(perform: {
+            refresh()
         })
     }
     
@@ -126,6 +105,37 @@ struct ForecastDetailsView: View {
                 }
             }
             .background(bg)
+        }
+    }
+    
+    func refresh() {
+        DownloadManager.shared.fetchOneCall(for: city) { (onCall, error) in
+            if let data = onCall {
+                let dataset = data.dailyTempChartData
+                self.tempMinMax = dataset
+                let readings  = data.hourlyObservations
+                self.hourlyReadings = readings
+                self.temp = "Temp: \(data.current.temp.tempInF)"
+                self.feelsLike = "Feels Like:\(data.current.feels_like.tempInF)"
+                
+                let dt = Date(timeIntervalSince1970: data.current.dt.timeIntervalValue )
+                let formatter = DateFormatter()
+                
+                formatter.dateFormat = "MMM d"
+
+                let dateStr = formatter.string(from: dt)
+
+                self.currentConditions = "Current Conditions - \(dateStr), \(data.current.dt.timeString)"
+                
+                if let iconString = data.current.weather.first?.icon {
+                    DownloadManager.shared.fetchWeatherIcon(iconString) { self.icon = $0 }
+                }
+
+                let compassHeading = ["N","NNE","NE","ENE","E","ESE","SE","SSE","S","SSW","SW","WSW","W","WNW","NW","NNW","N"]
+                let index = Int((Double(data.current.wind_deg) / 360.0) / 22.5) + 1
+                let compassDir = compassHeading[index]
+                self.windInfo = "Wind speed: \(data.current.wind_speed)m/s \(compassDir) Dew point: \(data.current.dew_point.tempInF)"
+            }
         }
     }
 }
