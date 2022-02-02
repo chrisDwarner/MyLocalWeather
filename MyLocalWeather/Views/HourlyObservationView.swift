@@ -16,24 +16,23 @@ struct HourlyObservationView: View {
     
     var body: some View {
         VStack {
-            Text(timeStamp).bold()
+            Text(timeStamp).font(.caption)
             Divider()
             HStack {
                 Image(uiImage: icon).resizable()
                     .scaledToFill().frame(width: 48, height: 48)
-                Text(temp)
+                Text(temp).font(.footnote)
             }
             Divider()
-            Text(visiblity)
+            Text(visiblity).font(.caption2)
         }
         .onAppear {
             self.timeStamp = hourly.timeStamp
             self.temp = "\(hourly.temp)"
-            self.visiblity = "\(hourly.visiblity)"
-            
+            self.visiblity = "\(hourly.pressure)hPa \(hourly.humidity)%"
             DownloadManager.shared.fetchWeatherIcon(hourly.icon) { icon = $0 }
         }
-        .frame(width: 120)
+        .frame(width: 100)
     }
 }
 

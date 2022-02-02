@@ -83,7 +83,9 @@ struct OneCallApi: Codable {
                 observations.append(HourlyModel(icon: icon,
                                                 timeStamp: hourly.dt.timeString,
                                                 temp: hourly.temp.tempInF,
-                                                visiblity: "\(hourly.visibility)"))
+                                                visiblity: "\(hourly.visibility)",
+                                                pressure: "\(hourly.pressure)",
+                                                humidity: "\(hourly.humidity)"))
             }
         }
         

@@ -19,18 +19,32 @@ let maxTempStroke = LinearGradient(colors:  tempRange, startPoint: .top, endPoin
 
 struct ForecastDetailsView: View {
     
-    
-    
     @ObservedRealmObject var city: City
     
     @State var tempMinMax: [TempMinMaxModel] = []
     @State var hourlyReadings: [HourlyModel] = []
-    
+    @State var icon: UIImage =  UIImage(named: "LaunchScreen") ?? UIImage()
+    @State var temp: String = "Temp"
+    @State var feelsLike: String = "feels like"
+    @State var currentConditions: String = "Current Conditions"
+
     var body: some View {
         let bg = RoundedRectangle(cornerRadius: 15).foregroundColor(Color(white: 0.9))
         VStack {
             Text(city.name)
+            Divider()
+            Text(currentConditions)
+            HStack {
+                Image(uiImage: icon).resizable()
+                    .scaledToFill().frame(width: 100, height: 100)
+                VStack(alignment: .leading) {
+                    Text(temp)
+                    Text(feelsLike)
+                }
+            }
             
+            
+
             Divider()
             Text("Daily Min Max temps")
             dailyMinMax.frame(height: 200)
@@ -45,8 +59,9 @@ struct ForecastDetailsView: View {
                         HourlyObservationView(hourly: hourly )
                     }
                 }
+                .background(bg)
             }
-            .frame(height: 180)
+            .frame(height: 130)
             .frame(maxWidth: .infinity)
             .background(bg)
             .padding(.horizontal)
@@ -58,7 +73,22 @@ struct ForecastDetailsView: View {
                     self.tempMinMax = dataset
                     let readings  = data.hourlyObservations
                     self.hourlyReadings = readings
-                    print( data.hourlyObservations )
+                    self.temp = "Temp: \(data.current.temp.tempInF)"
+                    self.feelsLike = "Feels Like:\(data.current.feels_like.tempInF)"
+                    
+                    let dt = Date(timeIntervalSince1970: data.current.dt.timeIntervalValue )
+                    let formatter = DateFormatter()
+                    
+                    formatter.dateFormat = "MMM d"
+
+                    let dateStr = formatter.string(from: dt)
+
+                    self.currentConditions = "Current Conditions - \(dateStr), \(data.current.dt.timeString)"
+                    
+                    if let iconString = data.current.weather.first?.icon {
+                        DownloadManager.shared.fetchWeatherIcon(iconString) { self.icon = $0 }
+                    }
+
                 }
             }
         })

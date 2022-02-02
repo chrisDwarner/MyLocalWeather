@@ -14,12 +14,16 @@ struct HourlyModel: Decodable, Identifiable {
     let timeStamp: String
     let temp: String
     let visiblity: String
+    let pressure: String
+    let humidity: String
     
     private enum CodingKeys: String, CodingKey {
         case icon = "icon"
         case timeStamp = "timeStamp"
         case temp = "temp"
         case visiblity = "visiblity"
+        case pressure = "pressure"
+        case humidity = "humidity"
     }
     
     init(from decoder: Decoder) throws {
@@ -31,18 +35,24 @@ struct HourlyModel: Decodable, Identifiable {
         self.timeStamp = try container.decode(String.self, forKey: .timeStamp)
         self.temp = try container.decode(String.self, forKey: .temp)
         self.visiblity = try container.decode(String.self, forKey: .visiblity)
+        self.pressure = try container.decode(String.self, forKey: .pressure)
+        self.humidity = try container.decode(String.self, forKey: .humidity)
     }
 
     init(icon: String = "",
          timeStamp: String = "",
          temp: String = "",
-         visiblity: String = "") {
+         visiblity: String = "",
+         pressure: String = "",
+         humidity: String = "") {
         self.id = UUID()
 
         self.icon = icon
         self.timeStamp = timeStamp
         self.temp = temp
         self.visiblity = visiblity
+        self.pressure = pressure
+        self.humidity = humidity
     }
     
 }

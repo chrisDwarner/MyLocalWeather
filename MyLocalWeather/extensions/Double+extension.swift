@@ -17,10 +17,10 @@ extension Double {
     }
     
     var tempInF: String {
-        return String( format: "%.0f", self.kelvinInF)
+        return String( format: "%.0fº", self.kelvinInF)
     }
     
     var tempInC: String {
-        return String( format: "%.0f", self.kelvinInC)
+        return String( format: "%.0fº", self.kelvinInC)
     }
 }
