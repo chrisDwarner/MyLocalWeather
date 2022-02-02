@@ -26,14 +26,9 @@ class DownloadManager: ObservableObject {
                   return
               }
 
-        let publisher = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        fetch( url ) { (data, error) in
             if let _ = error {
                 block( nil, error)
-                return
-            }
-            
-            guard let status = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= status else {
-                block(nil, APIError.apiError(reason: "bad HTTP response"))
                 return
             }
             guard let data = data else { return }
@@ -45,29 +40,23 @@ class DownloadManager: ObservableObject {
                 block( nil, error)
             }
         }
-        publisher.resume()
     }
     
     func fetchWeatherIcon(_ icon: String, block: @escaping (UIImage)->Void ) {
         guard let url = URL(string: "https://openweathermap.org/img/w/\(icon).png") else {
             return
         }
-        
-        let publisher = URLSession.shared.dataTask(with: url) { (data, response, error) in
+
+        fetch( url ) { (data, error) in
             if let _ = error {
                 return
             }
-            
-            guard let status = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= status else {
-                return
-            }
+
             guard let data = data else { return }
             if let iconImage = UIImage(data: data) {
                 block( iconImage )
             }
         }
-        publisher.resume()
-
     }
     
     func fetchOneCall(for city: City, block: @escaping (OneCallApi?, Error?)->Void ) {
@@ -77,15 +66,9 @@ class DownloadManager: ObservableObject {
                   return
               }
 
-        let publisher = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        fetch( url ) { (data, error ) in
             if let _ = error {
                 block( nil, error)
-                return
-            }
-            
-            guard let status = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= status else {
-                
-                block(nil, APIError.apiError(reason: "bad HTTP response"))
                 return
             }
             guard let data = data else { return }
@@ -101,7 +84,6 @@ class DownloadManager: ObservableObject {
                 block( nil, error)
             }
         }
-        publisher.resume()
     }
 }
 
@@ -113,6 +95,24 @@ extension Location {
 
 extension DownloadManager {
 
+    fileprivate func fetch(_ url: URL, block: @escaping (Data?, Error?)->Void ) {
+        let publisher = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let _ = error {
+                block(nil, error)
+                return
+            }
+            
+            guard let status = (response as? HTTPURLResponse)?.statusCode, 200..<299 ~= status else {
+                block(nil, APIError.apiError(reason: "Bad response from server"))
+                return
+            }
+            guard let data = data else { return }
+            block( data, nil)
+        }
+        publisher.resume()
+
+    }
+    
     enum APIError: Error, LocalizedError {
         case unknown, apiError(reason: String)
         var errorDescription: String? {

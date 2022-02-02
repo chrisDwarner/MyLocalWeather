@@ -10,11 +10,12 @@ import SwiftUI
 import PrettyAxis
 
 
-let colors1 = [Color(hue: 14 / 360.0, saturation: 0.88, brightness: 0.99),Color(hue: 40 / 360.0, saturation: 0.79, brightness: 0.97)]
-let tempRange: [Color] = [.red, .green, .black]
+let minStrokeColor = Color(red: 32/255, green: 145/255, blue: 40/255, opacity: 1)
+let tempRange: [Color] = [.red, minStrokeColor, .black]
+let minTempRangeStroke: [Color] = [minStrokeColor, minStrokeColor, minStrokeColor]
 let minTempFill = LinearGradient(colors: tempRange.map({$0.opacity(0.8)}), startPoint: .top, endPoint: .bottom)
 let maxTempFill = LinearGradient(colors:  tempRange.map({$0.opacity(0.6)}), startPoint: .top, endPoint: .bottom)
-let minTempStroke = LinearGradient(colors: colors1, startPoint: .top, endPoint: .bottom)
+let minTempStroke = LinearGradient(colors: minTempRangeStroke, startPoint: .top, endPoint: .bottom)
 let maxTempStroke = LinearGradient(colors:  tempRange, startPoint: .top, endPoint: .bottom)
 
 struct ForecastDetailsView: View {
